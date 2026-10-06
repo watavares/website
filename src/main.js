@@ -2,6 +2,8 @@
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const CHARGENET_API = "https://ca-api-dev.happytree-a55da5f4.northeurope.azurecontainerapps.io";
+// "Ask about me" backend (Azure Function). Empty = the assistant stays hidden.
+const ASK_API = "";
 
 document.addEventListener("DOMContentLoaded", () => {
   window.siteReady = true;
@@ -10,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   reveal();
   activeSection();
   portrait();
+  askAboutMe();
   liveStatus();
   lastDeploy();
 });
@@ -76,6 +79,61 @@ function portrait() {
   img.alt = "";
   img.onload = () => { box.replaceChildren(img); };
   img.src = "me.jpg";
+}
+
+// ---------- Ask about me: questions answered by Claude from my CV ----------
+function askAboutMe() {
+  const box = document.getElementById("ask");
+  if (!box || !ASK_API) return;
+  box.hidden = false;
+  const form = document.getElementById("ask-form");
+  const input = document.getElementById("ask-input");
+  const button = form.querySelector("button");
+  const out = document.getElementById("ask-answer");
+
+  async function ask(question) {
+    question = question.trim();
+    if (question.length < 3) return;
+    button.disabled = true;
+    const q = document.createElement("span");
+    q.className = "q";
+    q.textContent = question;
+    const typing = document.createElement("span");
+    typing.className = "typing";
+    typing.setAttribute("aria-label", "Thinking");
+    typing.innerHTML = "<span></span><span></span><span></span>";
+    out.replaceChildren(q, typing);
+    try {
+      const ctrl = new AbortController();
+      setTimeout(() => ctrl.abort(), 30000);
+      const res = await fetch(`${ASK_API}/api/ask`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question }),
+        signal: ctrl.signal,
+      });
+      const data = await res.json().catch(() => ({}));
+      // Text only, never HTML: the answer can't inject markup into the page
+      if (res.ok && data.answer) {
+        out.replaceChildren(q, document.createTextNode(data.answer));
+      } else {
+        const err = document.createElement("span");
+        err.className = "err";
+        err.textContent = data.error || "The assistant is unavailable right now. Email info@watavares.com instead.";
+        out.replaceChildren(q, err);
+      }
+    } catch (e) {
+      const err = document.createElement("span");
+      err.className = "err";
+      err.textContent = "The assistant didn't respond. Please try again, or email info@watavares.com.";
+      out.replaceChildren(q, err);
+    } finally {
+      button.disabled = false;
+    }
+  }
+
+  form.addEventListener("submit", (e) => { e.preventDefault(); ask(input.value); input.value = ""; });
+  box.querySelectorAll(".ask-chips button").forEach((chip) => chip.addEventListener("click", () => ask(chip.textContent)));
 }
 
 // ---------- Live ChargeNet status on the case study ----------

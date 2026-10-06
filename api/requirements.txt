@@ -1,0 +1,4 @@
+azure-functions
+anthropic
+azure-identity
+azure-data-tables

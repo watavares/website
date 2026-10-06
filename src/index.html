@@ -33,6 +33,24 @@
         <p class="role">Cloud &amp; Platform Engineer</p>
         <p class="tagline">I build and run infrastructure on Azure, and the part I enjoy most is when something stops breaking.</p>
 
+        <!-- Shown by main.js once the assistant's API is configured -->
+        <div class="ask" id="ask" hidden>
+          <form class="ask-form" id="ask-form">
+            <label class="ask-label" for="ask-input"><span class="spark" aria-hidden="true">✦</span> Ask about my experience</label>
+            <div class="ask-row">
+              <input id="ask-input" name="question" maxlength="300" autocomplete="off" placeholder="e.g. What has André done with Terraform?">
+              <button type="submit" aria-label="Ask"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+            </div>
+          </form>
+          <div class="ask-chips">
+            <button type="button">What Azure work has he done?</button>
+            <button type="button">Has he worked in regulated environments?</button>
+            <button type="button">What would he bring to a platform team?</button>
+          </div>
+          <div class="ask-answer" id="ask-answer" aria-live="polite"></div>
+          <p class="ask-note">Answers by Claude (AI), using only my CV. It can be wrong, so check anything important with me. Questions are logged.</p>
+        </div>
+
         <nav class="toc" aria-label="Sections">
           <a href="#about"><span class="bar"></span>About</a>
           <a href="#work"><span class="bar"></span>Work</a>
