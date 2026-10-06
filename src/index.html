@@ -84,7 +84,7 @@
     <section class="section" id="about" aria-labelledby="about-title">
       <div class="container two-col">
         <div data-reveal>
-          <p class="kicker">About</p>
+          <p class="kicker"><span class="num">01</span>About</p>
           <h2 id="about-title">Six years from server rooms to the cloud</h2>
         </div>
         <div class="prose" data-reveal>
@@ -99,7 +99,7 @@
     <section class="section" id="projects" aria-labelledby="projects-title">
       <div class="container">
         <div data-reveal>
-          <p class="kicker">Projects</p>
+          <p class="kicker"><span class="num">02</span>Projects</p>
           <h2 id="projects-title">Things I've built and run</h2>
         </div>
 
@@ -154,56 +154,114 @@
     <section class="section" id="experience" aria-labelledby="experience-title">
       <div class="container">
         <div data-reveal>
-          <p class="kicker">Experience</p>
+          <p class="kicker"><span class="num">03</span>Experience</p>
           <h2 id="experience-title">Where I've worked</h2>
         </div>
-        <ol class="timeline">
-          <li data-reveal>
-            <div class="when">Mar 2026 – now<span>Amsterdam</span></div>
-            <div class="what">
-              <h3>Cloud Engineer <span>· ACT Group</span></h3>
-              <p>Cloud, identity and DevOps work for a fast-moving engineering organisation with its own in-house software.</p>
-              <ul>
+
+        <dl class="glance">
+          <div data-reveal><dt>years in infrastructure</dt><dd>6<span>+</span></dd></div>
+          <div data-reveal><dt>countries worked in</dt><dd>3</dd></div>
+          <div data-reveal><dt>global pharma clients</dt><dd>2</dd></div>
+          <div data-reveal><dt>freelancing since</dt><dd>2017</dd></div>
+        </dl>
+
+        <ol class="cv">
+          <li class="cv-item" data-reveal>
+            <article class="cv-card tilt current">
+              <header class="cv-head">
+                <span class="cv-badge" aria-hidden="true">ACT</span>
+                <div class="cv-title">
+                  <h3>Cloud Engineer</h3>
+                  <p>ACT Group <span class="pin">Amsterdam</span></p>
+                </div>
+                <p class="cv-when"><span class="now-tag">Now</span>Mar 2026 – present</p>
+              </header>
+              <p class="cv-sum">Cloud, identity and DevOps for a fast-moving engineering organisation with its own in-house software.</p>
+              <ul class="cv-points">
                 <li>Own cloud and identity projects from design through delivery, including operations afterwards</li>
                 <li>Provision Azure resources and access models with Terraform, so environments stay reproducible</li>
-                <li>Plan and run domain changes across on-premises Active Directory and Entra ID with minimal disruption</li>
-                <li>Build Azure DevOps pipelines and deploy in-house software as Docker containers across dev, acceptance and production</li>
-                <li>Monitoring, dashboards and alerting in Datadog, so problems surface before a user reports them</li>
+                <li>Run domain changes across on-premises Active Directory and Entra ID with minimal disruption</li>
+                <li>Build Azure DevOps pipelines and ship in-house software as Docker containers across dev, acceptance and production</li>
+                <li>Monitoring and alerting in Datadog, so problems surface before a user reports them</li>
               </ul>
-            </div>
+              <ul class="chips"><li>Azure</li><li>Terraform</li><li>Entra ID</li><li>Azure DevOps</li><li>Docker</li><li>Datadog</li></ul>
+            </article>
           </li>
-          <li data-reveal>
-            <div class="when">Oct 2024 – Mar 2026<span>Remote</span></div>
-            <div class="what">
-              <h3>IT Consultant <span>· D-ploy GmbH, for Sandoz</span></h3>
-              <p>Improved and stabilised Microsoft and Azure environments for a global pharmaceutical company: Active Directory, Entra ID, Intune, SCCM and Microsoft 365, where every change has to be traceable and safe.</p>
-              <ul>
+          <li class="cv-item" data-reveal>
+            <article class="cv-card tilt">
+              <header class="cv-head">
+                <span class="cv-badge" aria-hidden="true">D</span>
+                <div class="cv-title">
+                  <h3>IT Consultant</h3>
+                  <p>D-ploy GmbH, for Sandoz <span class="pin">Remote</span></p>
+                </div>
+                <p class="cv-when">Oct 2024 – Mar 2026</p>
+              </header>
+              <p class="cv-sum">Improved and stabilised Microsoft and Azure environments for a global pharmaceutical company, where every change has to be traceable and safe.</p>
+              <ul class="cv-points">
                 <li>Automated reporting, licence checks and onboarding with PowerShell</li>
                 <li>Supported migration and modernisation projects without impacting users</li>
                 <li>Escalation point for the service desk, fixing issues at the root</li>
               </ul>
-            </div>
+              <ul class="chips"><li>Active Directory</li><li>Entra ID</li><li>Intune</li><li>SCCM</li><li>Microsoft 365</li><li>PowerShell</li></ul>
+            </article>
           </li>
-          <li data-reveal>
-            <div class="when">Jan 2024 – Oct 2024<span>North Brabant</span></div>
-            <div class="what">
-              <h3>IT Automation Engineer <span>· D-ploy GmbH, for Novartis</span></h3>
-              <p>Made the IT environment more consistent and easier to manage through automation and standardisation: PowerShell, SCCM and Intune for updates, policies and device configuration; compliance and security with Entra ID, Intune and Defender.</p>
-            </div>
+          <li class="cv-item" data-reveal>
+            <article class="cv-card tilt">
+              <header class="cv-head">
+                <span class="cv-badge" aria-hidden="true">D</span>
+                <div class="cv-title">
+                  <h3>IT Automation Engineer</h3>
+                  <p>D-ploy GmbH, for Novartis <span class="pin">North Brabant</span></p>
+                </div>
+                <p class="cv-when">Jan 2024 – Oct 2024</p>
+              </header>
+              <p class="cv-sum">Made the IT environment more consistent and easier to manage through automation and standardisation.</p>
+              <ul class="cv-points">
+                <li>Automated updates, policies and device configuration with PowerShell, SCCM and Intune</li>
+                <li>Improved compliance and security with Entra ID, Intune and Defender</li>
+                <li>Rolled out changes with the global team safely, without user disruption</li>
+              </ul>
+              <ul class="chips"><li>PowerShell</li><li>SCCM</li><li>Intune</li><li>Defender</li><li>Entra ID</li></ul>
+            </article>
           </li>
-          <li data-reveal>
-            <div class="when">Aug 2023 – Dec 2023<span>Luxembourg</span></div>
-            <div class="what">
-              <h3>IT Operations Engineer <span>· IOOIKOS</span></h3>
-              <p>Looked after a mixed VMware vSphere, Windows Server and Microsoft 365 environment: deeper technical escalations, PowerShell and Bash automation, monitoring, updates and performance tuning.</p>
-            </div>
+          <li class="cv-item" data-reveal>
+            <article class="cv-card tilt">
+              <header class="cv-head">
+                <span class="cv-badge" aria-hidden="true">IO</span>
+                <div class="cv-title">
+                  <h3>IT Operations Engineer</h3>
+                  <p>IOOIKOS <span class="pin">Luxembourg</span></p>
+                </div>
+                <p class="cv-when">Aug 2023 – Dec 2023</p>
+              </header>
+              <p class="cv-sum">Looked after a mixed VMware vSphere, Windows Server and Microsoft 365 environment.</p>
+              <ul class="cv-points">
+                <li>Solved the escalations too technical for the service desk</li>
+                <li>Automated checks and daily tasks with PowerShell and Bash</li>
+                <li>Monitoring, updates and performance tuning, keeping production stable</li>
+              </ul>
+              <ul class="chips"><li>VMware vSphere</li><li>Windows Server</li><li>Microsoft 365</li><li>Bash</li></ul>
+            </article>
           </li>
-          <li data-reveal>
-            <div class="when">May 2020 – Jul 2023<span>Aveiro, Portugal</span></div>
-            <div class="what">
-              <h3>Systems Engineer <span>· TJA Transports &amp; Logistics</span></h3>
-              <p>Hands-on, from servers to laptops: Active Directory, Windows Server, VMware, Veeam backups and ERP; storage, networking and telephony across sites; better monitoring and backup strategies.</p>
-            </div>
+          <li class="cv-item" data-reveal>
+            <article class="cv-card tilt">
+              <header class="cv-head">
+                <span class="cv-badge" aria-hidden="true">TJA</span>
+                <div class="cv-title">
+                  <h3>Systems Engineer</h3>
+                  <p>TJA Transports &amp; Logistics <span class="pin">Aveiro, Portugal</span></p>
+                </div>
+                <p class="cv-when">May 2020 – Jul 2023</p>
+              </header>
+              <p class="cv-sum">A very hands-on role, managing everything from servers to laptops.</p>
+              <ul class="cv-points">
+                <li>Active Directory, Windows Server, VMware, Veeam backups and ERP</li>
+                <li>Storage, networking, telephony and infrastructure across sites</li>
+                <li>Improved monitoring and backup strategies to increase reliability</li>
+              </ul>
+              <ul class="chips"><li>Active Directory</li><li>VMware</li><li>Veeam</li><li>Networking</li><li>PowerShell</li></ul>
+            </article>
           </li>
         </ol>
       </div>
@@ -213,31 +271,53 @@
     <section class="section" id="skills" aria-labelledby="skills-title">
       <div class="container">
         <div data-reveal>
-          <p class="kicker">Skills</p>
+          <p class="kicker"><span class="num">04</span>Skills</p>
           <h2 id="skills-title">What I work with</h2>
         </div>
-        <div class="skills">
-          <div class="skill-group" data-reveal>
+        <div class="toolbox">
+          <div class="tool-card" data-reveal>
+            <span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 8.5a4 4 0 0 1-.5 7.97V18H7Z"/></svg></span>
             <h3>Cloud &amp; infrastructure as code</h3>
-            <p>Azure infrastructure and landing zones · Terraform · Azure Policy · networking, VPN and firewalls</p>
+            <ul class="chips"><li>Azure</li><li>Landing zones</li><li>Terraform</li><li>Azure Policy</li><li>Networking, VPN &amp; firewalls</li></ul>
           </div>
-          <div class="skill-group" data-reveal>
+          <div class="tool-card" data-reveal>
+            <span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h10M4 12h16M4 18h7M17 4l3 2-3 2M17 16l3 2-3 2"/></svg></span>
             <h3>Delivery</h3>
-            <p>Azure DevOps · GitHub Actions · Docker and container deployments · Git</p>
+            <ul class="chips"><li>Azure DevOps</li><li>GitHub Actions</li><li>Docker</li><li>Containers across dev, acc &amp; prod</li><li>Git</li></ul>
           </div>
-          <div class="skill-group" data-reveal>
+          <div class="tool-card" data-reveal>
+            <span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.3 7.5 9.5 4.3-1.2 7.5-4.9 7.5-9.5V6L12 3Z"/><path d="m9 12 2 2 4-4"/></svg></span>
             <h3>Identity &amp; security</h3>
-            <p>Entra ID · Active Directory · Conditional Access and PIM · Intune · Defender for Endpoint</p>
+            <ul class="chips"><li>Entra ID</li><li>Active Directory</li><li>Conditional Access &amp; PIM</li><li>Intune</li><li>Defender for Endpoint</li></ul>
           </div>
-          <div class="skill-group" data-reveal>
+          <div class="tool-card" data-reveal>
+            <span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 13h4l2-6 4 12 2-6h6"/></svg></span>
             <h3>Operations</h3>
-            <p>Datadog · Azure Monitor and KQL · PowerShell and Bash automation · VMware vSphere · Veeam and Commvault</p>
+            <ul class="chips"><li>Datadog</li><li>Azure Monitor &amp; KQL</li><li>PowerShell &amp; Bash</li><li>VMware vSphere</li><li>Veeam &amp; Commvault</li></ul>
           </div>
         </div>
-        <div class="meta-row" data-reveal>
-          <div><h3>Certification</h3><p>CompTIA A+</p></div>
-          <div><h3>Education</h3><p>Aveiro University: Computer Science and Organizational Communication<br>AEE Estarreja: Management and Programming of Computer Systems</p></div>
-          <div><h3>Languages</h3><p>Portuguese (native) · English · Spanish</p></div>
+
+        <div class="facts-row">
+          <div class="fact-card" data-reveal>
+            <span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="5"/><path d="m9 13.5-1.5 7 4.5-2.5 4.5 2.5-1.5-7"/></svg></span>
+            <h3>Certification</h3>
+            <p>CompTIA A+</p>
+          </div>
+          <div class="fact-card" data-reveal>
+            <span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m2 9 10-5 10 5-10 5L2 9Z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5"/></svg></span>
+            <h3>Education</h3>
+            <p>Aveiro University<br><span class="muted">Computer Science and Organizational Communication</span></p>
+            <p>AEE Estarreja<br><span class="muted">Management and Programming of Computer Systems</span></p>
+          </div>
+          <div class="fact-card" data-reveal>
+            <span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg></span>
+            <h3>Languages</h3>
+            <ul class="langs">
+              <li>Portuguese <span class="level">Native</span></li>
+              <li>English <span class="level">Professional</span></li>
+              <li>Spanish <span class="level">Professional</span></li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -245,7 +325,7 @@
     <!-- Contact -->
     <section class="section contact" id="contact" aria-labelledby="contact-title">
       <div class="container" data-reveal>
-        <p class="kicker">Contact</p>
+        <p class="kicker"><span class="num">05</span>Contact</p>
         <h2 id="contact-title">Let's talk</h2>
         <p class="lede">Questions about a role, a project, or something you saw here? I'm happy to hear from you.</p>
         <div class="contact-links">
