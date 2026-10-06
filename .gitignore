@@ -1,0 +1,14 @@
+# Dependencies and build output
+node_modules/
+dist/
+.astro/
+
+# Terraform
+.terraform/
+*.tfstate*
+*.tfvars
+
+# Local environment
+.env
+.env.*
+.DS_Store
