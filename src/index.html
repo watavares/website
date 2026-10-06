@@ -4,176 +4,264 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>André Tavares · Cloud & Platform Engineer</title>
-  <meta name="description" content="André Tavares is a cloud and platform engineer in Utrecht. Six years of infrastructure in regulated environments, now Azure, Terraform and identity.">
+  <meta name="description" content="André Tavares, Cloud & Platform Engineer in Utrecht. Azure infrastructure, Terraform, identity and operational reliability across hybrid environments.">
   <meta property="og:title" content="André Tavares · Cloud & Platform Engineer">
-  <meta property="og:description" content="I build and run infrastructure, and the part I enjoy most is when something stops breaking.">
+  <meta property="og:description" content="Azure infrastructure, automation and operational reliability across hybrid environments.">
   <meta property="og:url" content="https://watavares.com">
-  <meta property="og:type" content="profile">
-  <meta name="theme-color" content="#f7f5f1" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#111214" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#fbfaf8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f1012" media="(prefers-color-scheme: dark)">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
   <script>
+    // Before first paint, so there's no flash: saved theme, and enable scroll-reveal styles
     document.documentElement.classList.add("js");
     try { const t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+    // Safety net: if main.js never runs, show everything anyway
     setTimeout(() => { if (!window.siteReady) document.querySelectorAll("[data-reveal]").forEach((el) => el.classList.add("in")); }, 2500);
   </script>
   <script src="main.js" defer></script>
 </head>
 <body>
-  <a class="skip" href="#content">Skip to content</a>
-  <div class="spotlight" aria-hidden="true"></div>
+  <a class="skip" href="#main">Skip to content</a>
 
-  <div class="layout">
-    <!-- Left: who I am, always in view on desktop -->
-    <header class="intro">
-      <div class="intro-top">
-        <div class="portrait" aria-hidden="true"><span>AT</span></div>
-        <h1>André Tavares</h1>
-        <p class="role">Cloud &amp; Platform Engineer</p>
-        <p class="tagline">I build and run Azure infrastructure for teams where downtime is expensive.</p>
-        <p class="now"><span class="now-dot" aria-hidden="true"></span>Now: Cloud Engineer at ACT Group</p>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="logo" href="#top" aria-label="André Tavares, home">AT<span>.</span></a>
+      <nav aria-label="Main">
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path class="sun" d="M12 4V2m0 20v-2m8-8h2M2 12h2m13.66-5.66 1.41-1.41M4.93 19.07l1.41-1.41m0-11.32L4.93 4.93m14.14 14.14-1.41-1.41M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"/><path class="moon" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+      </button>
+    </div>
+  </header>
 
-        <nav class="toc" aria-label="Sections">
-          <a href="#about"><span class="bar"></span>About</a>
-          <a href="#story"><span class="bar"></span>Story</a>
-          <a href="#principles"><span class="bar"></span>How I work</a>
-          <a href="#contact"><span class="bar"></span>Contact</a>
-        </nav>
-      </div>
-
-      <div class="intro-bottom">
-        <ul class="socials" aria-label="Elsewhere">
-          <li><a href="https://github.com/watavares" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg></a></li>
-          <li><a href="https://www.linkedin.com/in/watavares" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6h.1c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.2ZM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2ZM7.1 20.5H3.5V9h3.6v11.5ZM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0Z"/></svg></a></li>
-          <li><a href="mailto:info@watavares.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm9 7.3L4 7.1V17h16V7.1l-8 5.2ZM5.4 7l6.6 4.3L18.6 7H5.4Z"/></svg></a></li>
-        </ul>
-        <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path class="sun" d="M12 4V2m0 20v-2m8-8h2M2 12h2m13.66-5.66 1.41-1.41M4.93 19.07l1.41-1.41m0-11.32L4.93 4.93m14.14 14.14-1.41-1.41M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"/><path class="moon" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
-        </button>
-      </div>
-    </header>
-
-    <!-- Right: the story -->
-    <main id="content">
-      <section id="about" aria-label="About">
-        <h2 class="mobile-heading">About</h2>
-        <div class="prose" data-reveal>
-          <p>I started in the server room: Windows Server, VMware, backups, and the laptop on every desk. Six years and three countries later, my days are <strong>Azure, Terraform and identity</strong>. The tools changed. The job didn't: keep the platform steady, so the people building on it can move fast.</p>
-          <p>Most of that time was in <strong>business-critical, regulated environments</strong>: global pharma, logistics, and now an engineering company that ships its own software. Places where a bad change is expensive. They taught me to <strong>test first, write things down, and ask before assuming</strong>.</p>
-          <p>I'm Portuguese and live in Utrecht. Away from work I'm usually doing sports, or building something small for the web. This site is one of those.</p>
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <p class="eyebrow">Utrecht, NL · Available for a chat</p>
+          <h1>André Tavares</h1>
+          <p class="role">Cloud &amp; Platform Engineer</p>
+          <p class="lede">I build and run infrastructure on Azure, and the part I enjoy most is when something stops breaking.</p>
+          <div class="cta">
+            <a class="btn primary" href="#projects">See my work</a>
+            <a class="btn" href="#contact">Get in touch</a>
+          </div>
         </div>
+        <div class="hero-visual" aria-hidden="true">
+          <canvas id="network"></canvas>
+        </div>
+      </div>
+    </section>
 
-        <figure class="motto" data-reveal>
-          <blockquote>The part I enjoy most is when something stops breaking.</blockquote>
-          <!-- Placeholder: replaced by André's real signature (src/signature.svg) when he sends one -->
-          <figcaption><span class="signature-text">André</span></figcaption>
-        </figure>
-      </section>
+    <!-- Live -->
+    <section class="live" aria-labelledby="live-title">
+      <div class="container">
+        <div class="live-card" data-reveal>
+          <div class="live-head">
+            <span class="pulse" aria-hidden="true"></span>
+            <h2 id="live-title">Running right now</h2>
+            <a class="live-link" href="https://ca-api-dev.happytree-a55da5f4.northeurope.azurecontainerapps.io">ChargeNet status page →</a>
+          </div>
+          <p class="live-sub">Live figures from my ChargeNet platform on Azure: simulated truck charging stations, ingested through IoT Hub every five minutes.</p>
+          <dl class="live-stats" id="live-stats">
+            <div><dt>Stations online</dt><dd data-stat="online">–</dd></div>
+            <div><dt>Power drawn now</dt><dd data-stat="power">–</dd></div>
+            <div><dt>Energy today</dt><dd data-stat="energy">–</dd></div>
+            <div><dt>Sites</dt><dd data-stat="sites">–</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
 
-      <section id="story" aria-label="My story">
-        <h2 class="mobile-heading">Story</h2>
-        <p class="story-intro" data-reveal>Six years, three countries, one job: keep it running. Here's how I got here.</p>
-        <ol class="story">
-          <li class="chapter" data-reveal>
-            <p class="year">2017</p>
-            <div class="chapter-body">
-              <p class="place">Freelance · alongside every job since</p>
-              <h3>It started with websites</h3>
-              <p>Websites, e-commerce pages and small IT setups for people I knew. Small scale, big lesson: when it's yours, you design it, deploy it, break it and fix it yourself.</p>
-            </div>
-          </li>
-          <li class="chapter" data-reveal>
-            <p class="year">2020</p>
-            <div class="chapter-body">
-              <p class="place">Aveiro, Portugal · Systems Engineer, TJA Transports &amp; Logistics</p>
-              <h3>The server room</h3>
-              <p>All of IT for a logistics company across several sites, from servers to laptops: Active Directory, VMware, Veeam backups, ERP, networking and telephony. I automated the daily chores with PowerShell and improved monitoring and backups until the whole thing was more reliable.</p>
-              <ul class="tags"><li>Active Directory</li><li>VMware</li><li>Veeam</li><li>Networking</li></ul>
-            </div>
-          </li>
-          <li class="chapter" data-reveal>
-            <p class="year">2023</p>
-            <div class="chapter-body">
-              <p class="place">Bertrange, Luxembourg · IT Operations Engineer, IOOIKOS</p>
-              <h3>The first move abroad</h3>
-              <p>A mixed VMware, Windows Server and Microsoft 365 estate, and the escalations too deep for the service desk. PowerShell and Bash automation, monitoring and tuning, and learning to change production without breaking it.</p>
-              <ul class="tags"><li>VMware vSphere</li><li>Windows Server</li><li>Bash</li></ul>
-            </div>
-          </li>
-          <li class="chapter" data-reveal>
-            <p class="year">2024</p>
-            <div class="chapter-body">
-              <p class="place">North Brabant and remote · D-ploy, for Novartis, then Sandoz</p>
-              <h3>Where every change is audited</h3>
-              <p>Two global pharmaceutical companies, where a change has to be safe, traceable and approved. I automated device management with PowerShell, SCCM and Intune, tightened compliance with Entra ID and Defender, and became the escalation point for problems that needed fixing at the root.</p>
-              <ul class="tags"><li>Entra ID</li><li>Intune</li><li>SCCM</li><li>Defender</li><li>Microsoft 365</li><li>PowerShell</li></ul>
-            </div>
-          </li>
-          <li class="chapter" data-reveal>
-            <p class="year">2026</p>
-            <div class="chapter-body">
-              <p class="place">Amsterdam · Cloud Engineer, ACT Group · now</p>
-              <h3>Cloud, end to end</h3>
-              <p>For an engineering company that ships its own software, I own cloud and identity work from the design to the alert afterwards: Azure in Terraform, Active Directory and Entra ID changes without disruption, containers shipped through Azure DevOps to dev, acceptance and production, and Datadog alerting that catches problems before users do.</p>
-              <ul class="tags"><li>Azure</li><li>Terraform</li><li>Entra ID</li><li>Azure DevOps</li><li>Docker</li><li>Datadog</li></ul>
-            </div>
-          </li>
-          <li class="chapter" data-reveal>
-            <p class="year">2026</p>
-            <div class="chapter-body">
-              <p class="place">Side project · built and run in my own Azure subscription</p>
-              <a class="case" href="chargenet.html">
-                <div class="case-head">
-                  <p class="eyebrow">Case study · Azure platform</p>
-                  <span class="live-pill" id="live-pill" hidden><span class="dot"></span><span class="txt"></span></span>
-                </div>
-                <h3>ChargeNet <span class="arrow">→</span></h3>
-                <p>The cloud platform behind an electric truck charging network, in miniature. I designed the landing zone, the telemetry pipeline and the way changes ship: exactly how I'd want to find them on day one in a new team.</p>
-                <dl class="numbers">
-                  <div><dt>Secrets in pipelines</dt><dd>0</dd></div>
-                  <div><dt>Running cost</dt><dd>~€2<small>/mo</small></dd></div>
-                  <div><dt>Pull requests merged</dt><dd>17</dd></div>
-                  <div><dt>Decision records</dt><dd>2</dd></div>
-                </dl>
-                <ul class="tags"><li>Terraform</li><li>Azure Policy</li><li>IoT Hub</li><li>Container Apps</li><li>Log Analytics</li><li>GitHub Actions</li></ul>
-              </a>
-            </div>
-          </li>
-          <li class="chapter next" data-reveal>
-            <p class="year">Next</p>
-            <div class="chapter-body">
-              <h3>Your team?</h3>
-              <p>The next chapter is a platform team that needs this. If that's yours, <a class="text-link" href="#contact">let's talk</a>.</p>
-            </div>
-          </li>
-        </ol>
-        <p class="more" data-reveal>Also: CompTIA A+ · Aveiro University, Computer Science and Organizational Communication · Portuguese, English and Spanish.</p>
-      </section>
-
-      <section id="principles" aria-label="How I work">
-        <h2 class="mobile-heading">How I work</h2>
-        <ol class="principles">
-          <li data-reveal><span class="n">01</span><h3>Test first</h3><p>When a bad change is expensive, ten minutes proving it in dev beats an hour explaining it in production.</p></li>
-          <li data-reveal><span class="n">02</span><h3>Write it down</h3><p>Runbooks, decision records, pull requests that explain why. The next person, often me, shouldn't have to guess.</p></li>
-          <li data-reveal><span class="n">03</span><h3>Ask before assuming</h3><p>I don't know everything about cloud, and I'll say so. A two-minute question beats an hour of guessing.</p></li>
-          <li data-reveal><span class="n">04</span><h3>Finish what I pick up</h3><p>Deployed isn't done. Done includes the alert afterwards, and the fix that stops it coming back.</p></li>
-        </ol>
-      </section>
-
-      <section id="contact" aria-label="Contact" class="contact">
-        <h2 class="mobile-heading">Contact</h2>
+    <!-- About -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container two-col">
         <div data-reveal>
-          <p class="contact-lead">Building a platform team, or hiring for a cloud role? I'd like to hear about it.</p>
-          <a class="mail" href="mailto:info@watavares.com">info@watavares.com</a>
-          <p class="small muted">Utrecht, the Netherlands</p>
+          <p class="kicker">About</p>
+          <h2 id="about-title">Six years from server rooms to the cloud</h2>
         </div>
-      </section>
+        <div class="prose" data-reveal>
+          <p>That has meant on-premises servers and virtualisation, enterprise Active Directory, and now Azure, identity and DevOps. Day to day I provision with Terraform, ship through Azure DevOps, help deploy in-house software in Docker containers, and watch how it behaves in Datadog.</p>
+          <p>Most of my work has been in business-critical, regulated environments where a bad change is expensive, so I've learned to test first, write things down, and ask before assuming. I don't know everything about cloud and I'm fine saying so. I learn quickly, I finish what I pick up, and I'd rather ask a colleague a short question than guess for an hour.</p>
+          <p>Outside work you'll usually find me doing sports or building something small for the web.</p>
+        </div>
+      </div>
+    </section>
 
-      <footer class="footer">
-        <p id="deploy">Built by hand · <a href="https://github.com/watavares/website">source on GitHub</a></p>
-      </footer>
-    </main>
-  </div>
+    <!-- Projects -->
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="container">
+        <div data-reveal>
+          <p class="kicker">Projects</p>
+          <h2 id="projects-title">Things I've built and run</h2>
+        </div>
+
+        <article class="project feature tilt" data-reveal>
+          <div class="project-body">
+            <p class="project-tag">Azure · Terraform · IoT · Observability</p>
+            <h3>ChargeNet</h3>
+            <p>A working miniature of the cloud platform behind an electric truck charging network. Simulated stations report over MQTT to IoT Hub; a processor moves telemetry into Log Analytics; alerts fire when a station faults or goes silent; a public status site and dashboard show it live.</p>
+            <ul class="facts">
+              <li><b>Landing zone</b> with Azure Policy guardrails, budgets and a hub-spoke network</li>
+              <li><b>Least privilege</b>: OIDC pipelines and managed identities, no stored client secrets</li>
+              <li><b>Environment vending</b>: one Terraform module per environment, platform-owned networking</li>
+              <li><b>Delivered by pull request</b>: plans posted on PRs, protected main, nightly drift checks</li>
+              <li><b>Decisions recorded</b> as ADRs, from public exposure to shared ingestion</li>
+            </ul>
+            <div class="links">
+              <a class="btn primary" href="https://ca-api-dev.happytree-a55da5f4.northeurope.azurecontainerapps.io">Live status</a>
+              <a class="btn" href="https://github.com/watavares/chargenet">Source &amp; architecture</a>
+              <a class="text-link" href="https://github.com/watavares/chargenet/tree/main/docs/decisions">Decision records →</a>
+            </div>
+          </div>
+          <div class="project-visual" aria-hidden="true">
+            <div class="arch">
+              <span class="node n1">Stations</span>
+              <span class="node n2">IoT Hub</span>
+              <span class="node n3">Processor</span>
+              <span class="node n4">Log Analytics</span>
+              <span class="node n5">Alerts</span>
+              <span class="node n6">Status API</span>
+              <svg viewBox="0 0 300 220" class="arch-lines"><path d="M60 40 H150 M150 40 V110 M150 110 H240 M240 110 V180 M240 145 H60 V180"/></svg>
+            </div>
+          </div>
+        </article>
+
+        <div class="grid-2">
+          <article class="project tilt" data-reveal>
+            <p class="project-tag">Azure Static Web Apps · Terraform · GitHub Actions</p>
+            <h3>This website</h3>
+            <p>Run like a production system: infrastructure in Terraform, deployed by GitHub Actions with OIDC, with the live figures above pulled straight from ChargeNet.</p>
+            <a class="text-link" href="https://github.com/watavares/website">View the source →</a>
+          </article>
+          <article class="project tilt" data-reveal>
+            <p class="project-tag">Freelance · since 2017</p>
+            <h3>Websites &amp; small IT setups</h3>
+            <p>Alongside full-time roles: websites, e-commerce pages and simple applications, from design to deployment and keeping them running. Where I first learned to deploy, break and fix my own things end to end.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="section" id="experience" aria-labelledby="experience-title">
+      <div class="container">
+        <div data-reveal>
+          <p class="kicker">Experience</p>
+          <h2 id="experience-title">Where I've worked</h2>
+        </div>
+        <ol class="timeline">
+          <li data-reveal>
+            <div class="when">Mar 2026 – now<span>Amsterdam</span></div>
+            <div class="what">
+              <h3>Cloud Engineer <span>· ACT Group</span></h3>
+              <p>Cloud, identity and DevOps work for a fast-moving engineering organisation with its own in-house software.</p>
+              <ul>
+                <li>Own cloud and identity projects from design through delivery, including operations afterwards</li>
+                <li>Provision Azure resources and access models with Terraform, so environments stay reproducible</li>
+                <li>Plan and run domain changes across on-premises Active Directory and Entra ID with minimal disruption</li>
+                <li>Build Azure DevOps pipelines and deploy in-house software as Docker containers across dev, acceptance and production</li>
+                <li>Monitoring, dashboards and alerting in Datadog, so problems surface before a user reports them</li>
+              </ul>
+            </div>
+          </li>
+          <li data-reveal>
+            <div class="when">Oct 2024 – Mar 2026<span>Remote</span></div>
+            <div class="what">
+              <h3>IT Consultant <span>· D-ploy GmbH, for Sandoz</span></h3>
+              <p>Improved and stabilised Microsoft and Azure environments for a global pharmaceutical company: Active Directory, Entra ID, Intune, SCCM and Microsoft 365, where every change has to be traceable and safe.</p>
+              <ul>
+                <li>Automated reporting, licence checks and onboarding with PowerShell</li>
+                <li>Supported migration and modernisation projects without impacting users</li>
+                <li>Escalation point for the service desk, fixing issues at the root</li>
+              </ul>
+            </div>
+          </li>
+          <li data-reveal>
+            <div class="when">Jan 2024 – Oct 2024<span>North Brabant</span></div>
+            <div class="what">
+              <h3>IT Automation Engineer <span>· D-ploy GmbH, for Novartis</span></h3>
+              <p>Made the IT environment more consistent and easier to manage through automation and standardisation: PowerShell, SCCM and Intune for updates, policies and device configuration; compliance and security with Entra ID, Intune and Defender.</p>
+            </div>
+          </li>
+          <li data-reveal>
+            <div class="when">Aug 2023 – Dec 2023<span>Luxembourg</span></div>
+            <div class="what">
+              <h3>IT Operations Engineer <span>· IOOIKOS</span></h3>
+              <p>Looked after a mixed VMware vSphere, Windows Server and Microsoft 365 environment: deeper technical escalations, PowerShell and Bash automation, monitoring, updates and performance tuning.</p>
+            </div>
+          </li>
+          <li data-reveal>
+            <div class="when">May 2020 – Jul 2023<span>Aveiro, Portugal</span></div>
+            <div class="what">
+              <h3>Systems Engineer <span>· TJA Transports &amp; Logistics</span></h3>
+              <p>Hands-on, from servers to laptops: Active Directory, Windows Server, VMware, Veeam backups and ERP; storage, networking and telephony across sites; better monitoring and backup strategies.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="section" id="skills" aria-labelledby="skills-title">
+      <div class="container">
+        <div data-reveal>
+          <p class="kicker">Skills</p>
+          <h2 id="skills-title">What I work with</h2>
+        </div>
+        <div class="skills">
+          <div class="skill-group" data-reveal>
+            <h3>Cloud &amp; infrastructure as code</h3>
+            <p>Azure infrastructure and landing zones · Terraform · Azure Policy · networking, VPN and firewalls</p>
+          </div>
+          <div class="skill-group" data-reveal>
+            <h3>Delivery</h3>
+            <p>Azure DevOps · GitHub Actions · Docker and container deployments · Git</p>
+          </div>
+          <div class="skill-group" data-reveal>
+            <h3>Identity &amp; security</h3>
+            <p>Entra ID · Active Directory · Conditional Access and PIM · Intune · Defender for Endpoint</p>
+          </div>
+          <div class="skill-group" data-reveal>
+            <h3>Operations</h3>
+            <p>Datadog · Azure Monitor and KQL · PowerShell and Bash automation · VMware vSphere · Veeam and Commvault</p>
+          </div>
+        </div>
+        <div class="meta-row" data-reveal>
+          <div><h3>Certification</h3><p>CompTIA A+</p></div>
+          <div><h3>Education</h3><p>Aveiro University: Computer Science and Organizational Communication<br>AEE Estarreja: Management and Programming of Computer Systems</p></div>
+          <div><h3>Languages</h3><p>Portuguese (native) · English · Spanish</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact" id="contact" aria-labelledby="contact-title">
+      <div class="container" data-reveal>
+        <p class="kicker">Contact</p>
+        <h2 id="contact-title">Let's talk</h2>
+        <p class="lede">Questions about a role, a project, or something you saw here? I'm happy to hear from you.</p>
+        <div class="contact-links">
+          <a class="btn primary" href="mailto:info@watavares.com">info@watavares.com</a>
+          <a class="btn" href="https://www.linkedin.com/in/watavares">LinkedIn</a>
+          <a class="btn" href="https://github.com/watavares">GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© <span id="year">2026</span> André Tavares · Utrecht</span>
+      <span id="deploy">Deployed on Azure with Terraform &amp; GitHub Actions</span>
+    </div>
+  </footer>
 </body>
 </html>
