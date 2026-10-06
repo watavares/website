@@ -256,84 +256,17 @@ section { padding-bottom: 112px; scroll-margin-top: 88px; }
   .flow-arrow { width: 2px; height: 16px; flex: none; align-self: center; background: repeating-linear-gradient(180deg, var(--accent) 0 6px, transparent 6px 12px); }
 }
 
-/* ---------- Motion pass ---------- */
-
-/* Scroll progress bar */
-.progress {
-  position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 60; pointer-events: none;
-  background: var(--accent); transform-origin: 0 50%; transform: scaleX(var(--progress, 0));
-}
-
-/* Name rises in letter by letter */
-.split .ch { display: inline-block; white-space: pre; }
-.js .split .ch { opacity: 0; transform: translateY(0.45em) rotate(4deg); animation: letter .7s cubic-bezier(.2, .8, .2, 1) forwards; animation-delay: calc(var(--i) * 32ms + .1s); }
-@keyframes letter { to { opacity: 1; transform: none; } }
-
-/* Rotating last word of the tagline */
-.tagline { max-width: 32ch; }
-.rotator {
-  display: block; position: relative; height: 1.45em; overflow: hidden; margin-top: 2px;
-  font-family: var(--serif); font-style: italic; font-size: 1.35em; color: var(--accent);
-}
-.rotator span { position: absolute; left: 0; top: 0; white-space: nowrap; transition: transform .6s cubic-bezier(.7, 0, .2, 1), opacity .6s; }
-.rotator span.out { transform: translateY(-110%); opacity: 0; }
-.rotator span.in { transform: translateY(110%); opacity: 0; }
-
-/* "Now" status line */
+/* ---------- Calm extras ---------- */
 .now { display: inline-flex; align-items: center; gap: 10px; margin: 18px 0 0; font-size: 14px; color: var(--muted); }
-.now-dot { width: 8px; height: 8px; border-radius: 50%; background: #1f9d55; animation: live 2s infinite; }
-
-/* Portrait: a slowly turning ring */
-.portrait { position: relative; overflow: visible; }
-.portrait::before {
-  content: ""; position: absolute; inset: -6px; border-radius: 50%; z-index: -1;
-  background: conic-gradient(from var(--turn, 0deg), var(--accent), transparent 30%, transparent 70%, var(--accent));
-  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
-          mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
-  animation: turn 8s linear infinite;
-}
-.portrait > * { border-radius: 50%; overflow: hidden; }
-@property --turn { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
-@keyframes turn { to { --turn: 360deg; } }
-
-/* Key phrases: an underline that draws in when the paragraph appears */
-.prose strong {
-  background: linear-gradient(var(--accent-tint), var(--accent-tint)) 0 88% / 0 0.42em no-repeat;
-  transition: background-size 1s cubic-bezier(.2, .7, .2, 1) .35s;
-}
-.prose.in strong, html:not(.js) .prose strong { background-size: 100% 0.42em; }
-
-/* Experience lead line */
+.now-dot { width: 8px; height: 8px; border-radius: 50%; background: #1f9d55; }
 .job .lead { color: var(--text); font-size: 16.5px; font-weight: 500; margin-bottom: 8px; }
 
-/* Tags pop in one after another */
-.js [data-stagger] > * { opacity: 0; transform: translateY(6px) scale(.96); transition: opacity .4s, transform .4s cubic-bezier(.3, 1.4, .5, 1); transition-delay: calc(var(--i, 0) * 45ms + .25s); }
-.js .in [data-stagger] > *, .js [data-stagger].in > *, .js .in[data-stagger] > * { opacity: 1; transform: none; }
-
-/* Experience: a line that fills as you scroll through it */
-.jobs { position: relative; padding-left: 28px; }
-.jobs::before, .jobs::after { content: ""; position: absolute; left: 4px; top: 6px; bottom: 6px; width: 2px; border-radius: 2px; }
-.jobs::before { background: var(--line); }
-.jobs::after { background: var(--accent); transform-origin: top; transform: scaleY(var(--fill, 0)); }
-.job { position: relative; }
-.job::before {
-  content: ""; position: absolute; left: -29px; top: 30px; width: 10px; height: 10px; border-radius: 50%;
-  background: var(--bg); border: 2px solid var(--line); transition: border-color .4s, background-color .4s;
-}
-.job:first-child::before { top: 6px; }
-.job.reached::before { border-color: var(--accent); background: var(--accent); }
-
-/* Principles: a little lift and the number nudges on hover */
-.principles li { transition: transform .3s; }
-.principles li:hover { transform: translateY(-3px); }
-.principles li:hover .n { color: var(--text); }
-
-@media (prefers-reduced-motion: reduce) {
-  .js .split .ch, .js [data-stagger] > * { opacity: 1; transform: none; }
-  .prose strong { background-size: 100% 0.42em; }
-  .progress { display: none; }
-}
-.portrait { box-shadow: none; }
-/* Hide the name until it has been split into letters (no flash); the 2.5 s safety net in the page head doesn't apply, so fall back via animation */
-.js .split:not(.ready) { animation: reveal-fallback 0s 2.5s forwards; opacity: 0; }
-@keyframes reveal-fallback { to { opacity: 1; } }
+/* The line I work by, signed */
+.motto { margin: 72px 0 0; padding: 0; }
+.motto blockquote { margin: 0; font-family: var(--serif); font-size: clamp(30px, 3.6vw, 44px); line-height: 1.15; letter-spacing: -0.015em; color: var(--text); }
+.motto blockquote::before { content: "\201C"; display: block; color: var(--accent); font-size: 1.6em; line-height: .6; height: .45em; }
+.motto figcaption { margin-top: 18px; }
+.signature { height: 56px; width: auto; color: var(--accent); }
+.signature-text { font-family: "Segoe Script", "Brush Script MT", "Snell Roundhand", cursive; font-size: 34px; color: var(--accent); line-height: 1; }
+.js .motto .signature path { stroke-dasharray: 1200; stroke-dashoffset: 1200; }
+.js .motto.in .signature path { transition: stroke-dashoffset 2.4s ease .4s; stroke-dashoffset: 0; }
