@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ChargeNet case study · André Tavares</title>
+  <meta name="description" content="How André Tavares designed and runs ChargeNet: an Azure landing zone, IoT telemetry pipeline and delivery process for a simulated truck charging network.">
+  <meta property="og:title" content="ChargeNet: a case study in running a small Azure platform properly">
+  <meta property="og:url" content="https://watavares.com/chargenet.html">
+  <meta property="og:type" content="article">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    document.documentElement.classList.add("js");
+    try { const t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+    setTimeout(() => { if (!window.siteReady) document.querySelectorAll("[data-reveal]").forEach((el) => el.classList.add("in")); }, 2500);
+  </script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <div class="spotlight" aria-hidden="true"></div>
+
+  <article class="article" id="content">
+    <nav class="crumbs"><a href="./">← André Tavares</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path class="sun" d="M12 4V2m0 20v-2m8-8h2M2 12h2m13.66-5.66 1.41-1.41M4.93 19.07l1.41-1.41m0-11.32L4.93 4.93m14.14 14.14-1.41-1.41M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"/><path class="moon" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+      </button>
+    </nav>
+
+    <header class="article-head">
+      <p class="eyebrow">Case study · 2026</p>
+      <h1>ChargeNet</h1>
+      <p class="standfirst">A small Azure platform for an electric truck charging network, built the way I'd want to find one on my first day in a new team: governed, observable, and changed only through pull requests.</p>
+      <div class="head-links">
+        <a class="pill-link" href="https://ca-api-dev.happytree-a55da5f4.northeurope.azurecontainerapps.io">Live status page ↗</a>
+        <a class="pill-link" href="https://github.com/watavares/chargenet">Source and architecture ↗</a>
+      </div>
+    </header>
+
+    <section data-reveal>
+      <h2>The problem</h2>
+      <p>A charging network is mostly infrastructure nobody sees. Stations along the motorway report their status every few minutes; somebody needs to know within minutes when one breaks or goes quiet, and the platform behind it has to be secure, affordable and safe to change.</p>
+      <p>I wanted to show I can build that end to end on Azure, with the habits of a team that runs production: no portal clicks, no shared passwords, and every decision written down.</p>
+    </section>
+
+    <section data-reveal>
+      <h2>What I built</h2>
+      <figure class="flow" aria-label="Telemetry flow: stations to IoT Hub to processor to Log Analytics, then alerts, dashboard and public status API">
+        <div class="flow-row">
+          <span class="flow-node">Stations<small>MQTT, every 5 min</small></span>
+          <span class="flow-arrow" aria-hidden="true"></span>
+          <span class="flow-node">IoT Hub<small>shared ingestion</small></span>
+          <span class="flow-arrow" aria-hidden="true"></span>
+          <span class="flow-node">Processor<small>checkpointed</small></span>
+          <span class="flow-arrow" aria-hidden="true"></span>
+          <span class="flow-node accent">Log Analytics<small>KQL</small></span>
+        </div>
+        <div class="flow-out">
+          <span>Alerts: faulted or silent stations</span><span>Dashboard</span><span>Public status API</span>
+        </div>
+      </figure>
+      <ul class="checks">
+        <li><b>Landing zone.</b> Azure Policy denies resources outside the approved region, untagged resource groups and public IP addresses. A budget alerts at 50, 80 and 100%.</li>
+        <li><b>Hub-spoke network</b> with a spoke per environment, an NSG per subnet, and a gateway subnet ready for a site-to-site VPN.</li>
+        <li><b>Environment vending.</b> The platform layer hands each environment its resource group, network and identities; the environment itself is one reusable Terraform module.</li>
+        <li><b>Telemetry pipeline.</b> Simulated stations publish over MQTT; a processor moves messages into Log Analytics and only advances its checkpoint after a successful write, so a failure re-reads instead of losing data.</li>
+        <li><b>Observability.</b> Per-station alerts for faulted and silent stations; the silent alert also fires if the pipeline itself stops. A workbook shows status, power and energy per site, fault history and pipeline delay.</li>
+      </ul>
+    </section>
+
+    <section data-reveal>
+      <h2>Decisions I'd defend in a review</h2>
+      <div class="decisions">
+        <div><h3>No secrets in pipelines</h3><p>GitHub Actions signs in with OIDC federation and workloads use managed identities. The two keys that remain are where Azure offers nothing else, and they're documented as such.</p></div>
+        <div><h3>A deploy identity that can't escalate</h3><p>The platform pipeline may assign roles, but an Azure ABAC condition blocks it from granting Owner, User Access Administrator or RBAC Administrator, to itself or anyone.</p></div>
+        <div><h3>Public exposure as a recorded exception</h3><p>The status API is public by decision, not by accident: read-only identity, cached queries, one replica. The ADR also notes what the "no public IP" policy doesn't catch.</p></div>
+        <div><h3>One fleet, one ingestion point</h3><p>Every environment reads the same stream through its own consumer group and read-only key, which keeps IoT Hub on the free tier and mirrors how a real fleet works.</p></div>
+      </div>
+    </section>
+
+    <section data-reveal>
+      <h2>How changes ship</h2>
+      <p>Every change is a pull request. The pipeline builds container images tagged by a hash of their source, plans each Terraform layer and posts the plans as PR comments. Merging applies exactly those plans, platform first. <code>main</code> is protected, even for admins, and a nightly run fails if anything was changed outside Terraform.</p>
+    </section>
+
+    <section data-reveal>
+      <h2>What went wrong, and what I learned</h2>
+      <ul class="lessons">
+        <li><b>The free tier's hidden limits.</b> The first IoT Hub deploy failed: the Free tier allows two partitions and Terraform asked for four. Later, a second Container Apps environment failed on a one-per-region trial quota. Both now live in code comments and an ADR, not in my memory.</li>
+        <li><b>Defaults that drift.</b> Azure silently added a workload profile to new container environments; undeclared, Terraform would have tried to remove it every night and the drift check would never have been green. This is exactly why every plan gets read before it's merged.</li>
+        <li><b>Least privilege is a design input.</b> Narrowing the dev pipeline to its own resource group meant the platform had to own resource provider registration and role assignments. That shaped the whole layering, for the better.</li>
+      </ul>
+    </section>
+
+    <section data-reveal>
+      <h2>Next</h2>
+      <p>Acceptance and production environments with an approval gate before production, Terraform state split per layer so each pipeline can only touch its own, and a site-to-site VPN to a simulated depot network.</p>
+    </section>
+
+    <footer class="article-foot">
+      <a class="pill-link" href="https://github.com/watavares/chargenet/tree/main/docs/decisions">Read the decision records ↗</a>
+      <a href="./">← Back to André Tavares</a>
+    </footer>
+  </article>
+</body>
+</html>
