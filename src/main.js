@@ -5,7 +5,12 @@ const CHARGENET_API = "https://ca-api-dev.happytree-a55da5f4.northeurope.azureco
 
 document.addEventListener("DOMContentLoaded", () => {
   window.siteReady = true;
+  splitName();
+  staggerIndexes();
   themeToggle();
+  rotator();
+  scrollEffects();
+  counters();
   spotlight();
   reveal();
   activeSection();
@@ -13,6 +18,98 @@ document.addEventListener("DOMContentLoaded", () => {
   liveStatus();
   lastDeploy();
 });
+
+// ---------- Name rises in letter by letter ----------
+function splitName() {
+  document.querySelectorAll(".split").forEach((el) => {
+    const text = el.textContent;
+    el.textContent = "";
+    [...text].forEach((ch, i) => {
+      const s = document.createElement("span");
+      s.className = "ch";
+      s.setAttribute("aria-hidden", "true"); // the heading keeps its aria-label
+      s.style.setProperty("--i", i);
+      s.textContent = ch;
+      el.append(s);
+    });
+    el.classList.add("ready");
+  });
+}
+
+// Index children of [data-stagger] so they animate one after another
+function staggerIndexes() {
+  document.querySelectorAll("[data-stagger]").forEach((list) => {
+    [...list.children].forEach((child, i) => child.style.setProperty("--i", i));
+  });
+}
+
+// ---------- Rotating last word of the tagline ----------
+function rotator() {
+  const el = document.querySelector(".rotator");
+  if (!el || reduceMotion) return;
+  const words = el.dataset.words.split("|");
+  let i = 0;
+  setInterval(() => {
+    if (document.hidden) return;
+    const current = el.querySelector("span:not(.out)");
+    i = (i + 1) % words.length;
+    const next = document.createElement("span");
+    next.className = "in";
+    next.textContent = words[i];
+    el.append(next);
+    requestAnimationFrame(() => requestAnimationFrame(() => next.classList.remove("in")));
+    current.classList.add("out");
+    setTimeout(() => current.remove(), 700);
+  }, 2600);
+}
+
+// ---------- Scroll: progress bar and the experience timeline fill ----------
+function scrollEffects() {
+  const root = document.documentElement;
+  const jobs = document.querySelector(".jobs");
+  const items = jobs ? [...jobs.querySelectorAll(".job")] : [];
+  let queued = false;
+  const update = () => {
+    queued = false;
+    const max = root.scrollHeight - window.innerHeight;
+    root.style.setProperty("--progress", max > 0 ? (window.scrollY / max).toFixed(4) : 0);
+    if (!jobs) return;
+    // The line fills up to the point 60% down the viewport
+    const r = jobs.getBoundingClientRect();
+    const mark = window.innerHeight * 0.6;
+    const fill = Math.min(Math.max((mark - r.top) / r.height, 0), 1);
+    jobs.style.setProperty("--fill", fill.toFixed(4));
+    items.forEach((li) => li.classList.toggle("reached", li.getBoundingClientRect().top + 30 < mark));
+  };
+  const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+  update();
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+}
+
+// ---------- Numbers count up when they come into view ----------
+function counters() {
+  const els = document.querySelectorAll("[data-count]");
+  if (reduceMotion || !("IntersectionObserver" in window)) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      io.unobserve(e.target);
+      const target = Number(e.target.dataset.count);
+      if (!target) return;
+      const start = performance.now(), duration = 1100;
+      const tick = (now) => {
+        const t = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        e.target.textContent = Math.round(target * eased);
+        if (t < 1) requestAnimationFrame(tick);
+      };
+      e.target.textContent = "0";
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.6 });
+  els.forEach((el) => io.observe(el));
+}
 
 // ---------- Theme ----------
 function themeToggle() {
