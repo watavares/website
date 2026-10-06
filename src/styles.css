@@ -305,3 +305,6 @@ p { margin: 0 0 1em; }
 @media (prefers-reduced-motion: reduce) {
   .js [data-reveal] .kicker::after { transform: none; }
 }
+/* CV cards without monogram badges */
+.cv-head { grid-template-columns: 1fr auto; }
+@media (max-width: 860px) { .cv-head { grid-template-columns: 1fr; } .cv-when { grid-column: auto; } }
