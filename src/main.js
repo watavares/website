@@ -233,6 +233,6 @@ async function lastDeploy() {
     el.append("Last deployed ", when, " · ");
     const a = document.createElement("a");
     a.href = c.html_url; a.textContent = sha;
-    el.append(a, " · Azure, Terraform & GitHub Actions");
+    el.append(a, " · hand-built, deployed by GitHub Actions");
   } catch (e) { /* keep the static footer text */ }
 }
