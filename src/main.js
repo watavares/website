@@ -6,6 +6,7 @@ const CHARGENET_API = "https://ca-api-dev.happytree-a55da5f4.northeurope.azureco
 document.addEventListener("DOMContentLoaded", () => {
   window.siteReady = true;
   themeToggle();
+  storyLine();
   spotlight();
   reveal();
   activeSection();
@@ -13,6 +14,34 @@ document.addEventListener("DOMContentLoaded", () => {
   liveStatus();
   lastDeploy();
 });
+
+// ---------- Story line: the line fills and a dot travels down it as you scroll ----------
+function storyLine() {
+  const story = document.querySelector(".story");
+  if (!story) return;
+  const chapters = [...story.querySelectorAll(".chapter")];
+  if (reduceMotion) { chapters.forEach((c) => c.classList.add("reached")); return; }
+
+  const dot = document.createElement("span");
+  dot.className = "story-dot";
+  dot.setAttribute("aria-hidden", "true");
+  story.append(dot);
+
+  let queued = false;
+  const update = () => {
+    queued = false;
+    // Progress = how far a point 55% down the screen has travelled through the story
+    const mark = window.innerHeight * 0.55;
+    const r = story.getBoundingClientRect();
+    const fill = Math.min(Math.max((mark - r.top) / r.height, 0), 1);
+    story.style.setProperty("--fill", fill.toFixed(4));
+    chapters.forEach((c) => c.classList.toggle("reached", c.getBoundingClientRect().top + 28 < mark));
+  };
+  const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+  update();
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+}
 
 // ---------- Theme ----------
 function themeToggle() {
